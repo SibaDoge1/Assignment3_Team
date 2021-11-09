@@ -48,7 +48,7 @@
 | **blog**: [Plus Ultra](https://overcome-the-limits.tistory.com/) </br> **github**: [epitone](https://github.com/epitoneproject)| **blog**: [sudocorp](https://sudocorp.tistory.com/) </br> **github**: [SibaDoge1](https://github.com/SibaDoge1)| **blog**: [raejun92.log](https://velog.io/@raejun92) </br> **github**: [raejun92](https://github.com/raejun92)
 | ![sprint3](https://img.shields.io/badge/wanted-sprint3-orange) |![sprint3](https://img.shields.io/badge/wanted-sprint3-orange)  | ![sprint3](https://img.shields.io/badge/wanted-sprint3-orange) |
 | 실시간 저장 소켓 이벤트 | 실시간 저장 소켓 이벤트, DevOps | 퍼블리싱 관련 DB / API |
-| [프로젝트 회고](https://overcome-the-limits.tistory.com/entry/%ED%9A%8C%EA%B3%A0-%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%BD%94%EC%8A%A4-3%EC%B0%A8-%EA%B3%BC%EC%A0%9C?category=980007) | [프로젝트 회고]() | [프로젝트 회고]()
+| [프로젝트 회고](https://overcome-the-limits.tistory.com/entry/%ED%9A%8C%EA%B3%A0-%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%BD%94%EC%8A%A4-3%EC%B0%A8-%EA%B3%BC%EC%A0%9C?category=980007) | [프로젝트 회고](https://sudocorp.tistory.com/4) | [프로젝트 회고]()
 
 <br>
 <br>

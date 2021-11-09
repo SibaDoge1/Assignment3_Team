@@ -46,6 +46,7 @@ app.use(routes.user, userRouter);
 app.use(routes.project, projectRouter);
 app.use(routes.game, gameRouter);
 
+
 // 아래는 에러 핸들링 함수들
 app.use(function (req, res, next) {
   throw new NoPageError();

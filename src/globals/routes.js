@@ -7,7 +7,6 @@ const ROOT = '/';
 const USER_SIGNUP = '/user';
 const USER_SIGNIN = '/token';
 
-
 //Project
 const PROJECT_MY = '/projects/my'
 const PROJECT_MY_DETAIL = '/:projectId'

@@ -81,3 +81,12 @@ exports.postToken = async (req, res, next) => {
     next(err);
   }
 }
+
+//로그인 페이지 접속
+exports.getTokenPage = async (req, res, next) => {
+  try {
+    return res.render("login.html");
+  } catch (err) {
+    next(err);
+  }
+}

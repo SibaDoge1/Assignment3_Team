@@ -36,7 +36,4 @@ fs
     modules[file.replace('.js', '')] = require(path.join(__dirname, file));
   });
 
-modules.mongoose =
-
-
   module.exports = modules;

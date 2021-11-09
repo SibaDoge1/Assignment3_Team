@@ -1,0 +1,23 @@
+<!-- Socket Test 환경 -->
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>로그인</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h3>로그인</h3>
+
+    <form action = "#" accept-charset="utf-8" name = userInfo method="post">
+      <input type="text" class="form-control"  name="username" title="유저네임"  required/>
+      <br>
+      <input type="password" class="form-control" name="password" title="비밀번호"  required/>
+      <br>
+      <input type="submit" value="submit"/>
+    </form>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src='/js/clientSocket.js'></script>
+</body>

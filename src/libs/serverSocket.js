@@ -1,15 +1,20 @@
 const projectContoller = require("../controllers/projectController");
 const logger = require("../utils/logger");
+const io = require("socket.io")();
 
-function attachEvent(io) {
+function attachServer(server) {
+  io.attach(server);
+
   io.on('connection', (socket) => {
-    socket.emit('news', { message: "서버 연결 성공" });
+    socket.emit('news', {
+      message: "서버 연결 성공"
+    });
     logger.log("socket connected" + socket.id);
 
-    socket.on('OnCodeChanged', (data) => {
+    socket.on('onCodeChanged', (data) => {
       projectContoller.saveToBuffer(data);
     })
-    socket.on('ForceSave', (data) => {
+    socket.on('forceSave', (data) => {
       projectContoller.bufferToDB(data);
     })
 
@@ -20,4 +25,6 @@ function attachEvent(io) {
   });
 }
 
-module.exports.attachEvent = attachEvent;
+io.attachServer = attachServer;
+
+module.exports = io;

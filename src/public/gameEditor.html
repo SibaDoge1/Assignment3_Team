@@ -11,7 +11,8 @@
     <h3>게임 제작</h3>
     
     <div>
-      <label for="test" id="projectId" > projectId: <%=projectId%> </label>
+      <label> 프로젝트ID :  </label>
+      <p id="projectId"><%=projectId%></p>
       <br>
       <label for="title">projectName:    </label>
       <input type="text" class="form-control" oninput="OnCodeChanged()" id="titleForm" value=<%=projectName%> >
@@ -22,7 +23,7 @@
       <br>
     </div>
     
-    <button id="startGame" class="btn btn-primary" onclick="gamePublishButtonClick()">제출</button>
+    <button id="startGame" class="btn btn-primary" onclick="gamePublishButtonClick()">퍼블리싱 하기</button>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>

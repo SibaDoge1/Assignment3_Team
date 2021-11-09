@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const app = require('../app.js');
 const logger = require('../utils/logger.js');
 const http = require('http');
@@ -20,10 +21,9 @@ server.on('listening', onListening);
 
 
 //소켓 설정
-let io = require('socket.io')().attach(server);
 let serverSocket = require("../libs/serverSocket");
-serverSocket.attachEvent(io);
-app.locals.io = io;
+serverSocket.attachServer(server);
+app.locals.io = serverSocket;
 
 //아래는 함수들
 
@@ -56,9 +56,9 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ?
+    'Pipe ' + port :
+    'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -81,8 +81,8 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;
   logger.log('Listening on ' + bind);
 }

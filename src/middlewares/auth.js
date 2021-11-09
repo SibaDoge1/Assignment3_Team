@@ -17,8 +17,6 @@ const COOKIE_TOKEN_FEILD = 'AG3_JWT'
 exports.checkToken = async (req, res, next) => {
     //const authorization = req.headers.authorization;
     const authorization = req.cookies[COOKIE_TOKEN_FEILD]
-    
-
     //토큰이 없는경우
     if (!authorization) {
         return res.status(statusCode.UNAUTHORIZED)

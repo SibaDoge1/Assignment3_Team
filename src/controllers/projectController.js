@@ -69,7 +69,6 @@ exports.getMyProjectDetail = async (req, res, next) => {
         const { username } = req.query
         const verified = req.decoded.username
 
-        console.log()
 
         if (username === undefined || username != verified) {
             throw new ValidationError();
@@ -143,3 +142,64 @@ exports.deleteMyProject = async (req, res, next) => {
 
 }
 
+
+//프로젝트 정보를 임시로 버퍼에 저장
+exports.saveToBuffer = async (data) => {
+    try {
+        //입력값 이상 확인
+        if (data === undefined || data.projectName === undefined || 
+            data.projectData === undefined || data.projectId === undefined) {
+            throw new ValidationError();
+        }
+
+        //버퍼에 입력
+        saveDataBuffer.set(data.projectId, data);
+
+        //일정 시간 뒤 저장함수 실행
+        if (!saveTimerBuffer.get(data.projectId)) {
+            let timer = setTimeout(this.bufferToDB, 5000, {
+                projectId: data.projectId
+            });
+            saveTimerBuffer.set(data.projectId, timer);
+        }
+    } catch (err) {
+        throw err;
+    }
+}
+
+
+//버퍼혹은 받아온 데이터를 DB에 저장
+exports.bufferToDB = async (data) => {
+    try {
+        let lastestData = {};
+
+        //입력값 이상 확인
+        if (data === undefined || data.projectId === undefined) {
+            throw new ValidationError();
+        }
+
+        //console.log(saveDataBuffer.get(data.projectId));
+        //버퍼와 받아온 데이터 중 넣을 데이터 선택
+        if (data.projectName === undefined || data.projectData === undefined) {
+            lastestData = saveDataBuffer.get(data.projectId);
+        } else {
+            lastestData = data;
+        }
+
+        //쿼리 실행
+        let project = await updateProject(lastestData.projectId, lastestData.projectName, lastestData.projectData);
+
+        //db에 없을 시
+        if (project === undefined) {
+            throw new EntityNotExistError();
+        }
+        //정상 결과 시
+        else {
+            saveDataBuffer.delete(data.projectId);
+            saveTimerBuffer.delete(data.projectId);
+        }
+
+    } catch (err) {
+        throw err;
+    }
+}

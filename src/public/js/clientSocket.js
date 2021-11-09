@@ -3,64 +3,86 @@ var socket = io();
 
 const titleForm = document.querySelector('#titleForm');
 const contentForm = document.querySelector('#contentForm');
+const projectId = document.getElementById('projectId');
 
 const saveGameButton = document.querySelector('#saveGame');
 const startGameButton = document.querySelector('#startGame');
 
-/* 
-시나리오
-1. join 이벤트 발생 
-  - 서버 emit 클라이언트 on
-    - 처음 게임을 만든 경우 -> projectId만 받아옴. 
-    - 기존 게임을 수정하는 경우 -> projectId, title, content를 서버에서 받아옴. 
-    - 퍼블리싱된 게임을 수정하는 경우 -> projectId, title, content를 서버에서 데이터를 받아야 함. 
 
-2. OnCodeChanged 이벤트 발생 
-  - 서버 on 클리이언트 emit
-  - projectId, title, content를 서버에게 전달.   
-  - 텍스트 박스 엔터를 입력할 때, 제출 버튼을 누를 때 
-3. Quit 이벤트 발생 
-  - 서버 on 클리이언트 emit
-  - projectId, title, content를 서버에게 전달.    
-*/
-
-// 1. join 이벤트를 받아 game정보 출력
-socket.on('join', (data) => {
+// news 이벤트를 받아 콘솔에 출력
+socket.on('news', (data) => {
   console.log(data);
 })
 
-// 2. 텍스트 박스 값 변경 시 OnCodeChanged 이벤트 emit
+//에러 발생 시
+socket.on('onError', (data) => {
+  console.log(data);
+})
+
+
+//텍스트 박스 값 변경 시 서버에 프로젝트내용 전송
+//timer를 통해 최대 0.5초에 한번만 전송함
+let isCoolTime = false;
 function OnCodeChanged() {
-  const data = {
-    projectId: projectId.value,
-    projectName: titleForm.value,
-    projectData: contentForm.value
+  if (!isCoolTime) {
+    //타이머로 전송예약함
+    setTimeout(saveCodeData, 500)
+
+    //쿨타임 설정
+    isCoolTime = true;
+    
+    //타이머로 쿨타임 해제
+    setTimeout(function () {
+      isCoolTime = false;
+    }, 500)
   }
-  socket.emit("OnCodeChanged", data);
 }
 
-// 3. 게임 퍼블리시 버튼 클릭 시 Quit 이벤트 emit
+//전송하는 부분
+function saveCodeData() {
+  let data = {
+    projectId: projectId.innerText,
+    projectName: titleForm.value,
+    projectData: contentForm.value
+  }
+  socket.emit("onCodeChanged", data);
+}
+
+// 퍼블리시 버튼 클릭 시 서버에 퍼블리시하도록 post요청
 function gamePublishButtonClick() {
   const data = {
-    projectId: projectId,
+    projectId: projectId.innerText,
     projectName: titleForm.value,
     projectData: contentForm.value
   }
 
-  socket.emit("ForceSave", data);
+  //퍼블리시 전 저장
+  socket.emit("forceSave", data);
 
-  const token = document.cookie
+  const token = document.cookie['AG3_JWT'];
 
   // 퍼블리시 하는 API Post로 연결
-  const url = 'http//localhost:3000/games'
-  // const options = {
-  //   method: "POST",
-  //   headers: {
-
-  //   },
-  //   body: JSON.stringify(data)
-  // }
-  // fetch(url, options)
+  const url = window.location.origin+'/games'
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: token
+    },
+    body: JSON.stringify(data)
+  }
+  fetch(url, options).then((res)=>{
+    console.log(res);
+    if(res.status == 201){
+      alert("등록 성공!");
+    }
+    else{
+      return res.json();
+    }
+  }).then((body)=>{
+    if(body.message != undefined){
+      alert("등록 실패! : "+body.message);
+    }
+  })
 }
 
 let username = getQueryStrings().username;

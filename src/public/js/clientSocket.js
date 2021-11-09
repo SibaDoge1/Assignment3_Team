@@ -71,15 +71,13 @@ function gamePublishButtonClick() {
   //요청
   fetch(url, options)
   .then((res)=>{
-    if(res.status == 201){
-      alert("등록 성공!");
-    }
-    else{
-      return res.json();
-    }
+    return res.json();
   })
   .then((body)=>{
-    if(body.message != undefined){
+    if(body.success){
+      prompt("등록 성공! \n gameId : ", body.data._id);
+    }
+    else{
       alert("등록 실패! : "+body.message);
     }
   })

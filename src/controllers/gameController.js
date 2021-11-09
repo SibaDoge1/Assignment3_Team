@@ -136,7 +136,7 @@ exports.releaseGame = async (req, res, next) => {
 		
 		// 쿼리 실행
 		const releaseGame = await gameService.postOrUpdateGame(projectName, projectData, projectId, _id);
-
+		
 		//Response 201 CREATED
 		return res.status(statusCode.CREATED)
 		  .send(resFormatter.success(responseMessage.CREATE_GAME_SUCCESS, releaseGame));

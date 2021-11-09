@@ -90,6 +90,7 @@ exports.deleteProject = async projectId => {
     console.log(projectId);
     const project = await projectModel.deleteOne({ _id: projectId });
     
+    return project;
   } catch (err) {
     throw err;
   }

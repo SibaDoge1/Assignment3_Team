@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const createError = require('http-errors');
@@ -10,7 +11,9 @@ const { statusCode, routes, responseMessage } = require('./globals');
 const globalRouter = require('./routes/globalRouter');
 const userRouter = require('./routes/userRouter');
 const tokenRouter = require('./routes/tokenRouter');
+const projectRouter = require('./routes/projectRouter');
 const gameRouter = require('./routes/gameRouter');
+
 const { NoPageError } = require('./utils/errors/commonError');
 
 const connectDB = require('../src/utils/db');
@@ -20,6 +23,12 @@ connectDB();
 
 //서버 사전작업
 const app = express();
+
+//뷰 엔진 및 에셋 위치 설정
+app.set('views', path.join(__dirname, 'public'));
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.use(express.static(path.join(__dirname, 'public')));
 
 //미들웨어 설정
 app.use(helmet({
@@ -34,6 +43,7 @@ app.use(cookieParser());
 app.use(routes.root, globalRouter);
 app.use(routes.user, userRouter);
 // app.use(routes.token, tokenRouter);
+app.use(routes.project, projectRouter);
 app.use(routes.game, gameRouter);
 
 // 아래는 에러 핸들링 함수들

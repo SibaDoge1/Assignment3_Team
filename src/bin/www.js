@@ -18,6 +18,13 @@ server.listen(port, function () {
 server.on('error', onError);
 server.on('listening', onListening);
 
+
+//소켓 설정
+let io = require('socket.io')().attach(server);
+let serverSocket = require("../libs/serverSocket");
+serverSocket.attachEvent(io);
+app.locals.io = io;
+
 //아래는 함수들
 
 /**

@@ -3,9 +3,19 @@ const debug = require('debug');
 
 module.exports = {
   log: (msg) => {
-    debug('src:log')(msg);
+    if (process.env.DEBUG) {
+      debug('src:log')(msg);
+    }
+    else {
+      console.log(msg);
+    }
   },
   err: (msg) => {
-    debug('src:err')(msg);
+    if (process.env.DEBUG) {
+      debug('src:err')(msg);
+    }
+    else {
+      console.error(msg);
+    }
   }
 };

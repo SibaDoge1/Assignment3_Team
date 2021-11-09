@@ -34,6 +34,11 @@ module.exports = {
   NO_USER: '존재하지 않는 회원입니다.',
   MISS_MATCH_PW: '비밀번호가 맞지 않습니다.',
 
+  //프로젝트
+  PROJECT_CREATED: '프로젝트 생성 성공',
+  PROJECT_MY_LIST: '내 프로젝트 목록',
+  PROJECT_DELETED: '프로젝트 삭제 성공'
+
   // 게임(퍼블리시)
   CREATE_GAME_SUCCESS: '게임 배포 성공',
   READ_GAME_SUCCESS: '게임 조회 성공',

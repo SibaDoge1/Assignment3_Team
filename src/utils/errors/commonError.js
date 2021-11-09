@@ -10,4 +10,12 @@ class NoPageError extends Error {
   }
 }
 
+class EntityNotExistError extends Error { // 404
+  constructor(message = responseMessage.ENTITY_NOT_EXIST, status = statusCode.NOT_FOUND) {
+    super(message);
+    this.status = status;
+  }
+}
+
 module.exports.NoPageError = NoPageError;
+module.exports.EntityNotExistError = EntityNotExistError;

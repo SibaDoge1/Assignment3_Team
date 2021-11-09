@@ -14,15 +14,15 @@ projectRouter.post(routes.root, auth.checkToken, projectController.createProject
 projectRouter.get(routes.root, auth.checkToken, projectController.getMyProjectList);
 
 // 내 프로젝트 리스트
-projectRouter.get(routes.projectMyDeatail, auth.checkToken, projectController.getMyProjectDetail);
+projectRouter.get(routes.projectMyDetail, auth.checkToken, projectController.getMyProjectDetail);
 
 // 내 프로젝트 리스트
-projectRouter.delete(routes.projectMyDeatail, auth.checkToken, projectController.deleteMyProject);
+projectRouter.delete(routes.projectMyDetail, auth.checkToken, projectController.deleteMyProject);
 
 //소켓테스트용
-projectRouter.post('/socket', projectController.saveToBuffer);
+//projectRouter.post('/socket', projectController.saveToBuffer);
 //소켓테스트용
-projectRouter.post('/socket1', projectController.bufferToDB);
+//projectRouter.post('/socket1', projectController.bufferToDB);
 
 
 module.exports = projectRouter;

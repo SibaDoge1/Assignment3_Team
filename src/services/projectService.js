@@ -71,7 +71,8 @@ exports.updateProject = async (projectId, projectName, projectData) => {
     }, {
       new: true
     })
-    return project;
+    const newProject = await projectModel.findOne({ _id: projectId });
+    return newProject;
   } catch (err) {
     throw err;
   }
@@ -88,6 +89,7 @@ exports.deleteProject = async projectId => {
   try {
     console.log(projectId);
     const project = await projectModel.deleteOne({ _id: projectId });
+    
   } catch (err) {
     throw err;
   }

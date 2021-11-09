@@ -22,7 +22,7 @@ const routes = {
   user: USER_SIGNUP,
   token: USER_SIGNIN,
   project: PROJECT_MY,
-  projectMyDeatail: PROJECT_MY_DETAIL,
+  projectMyDetail: PROJECT_MY_DETAIL,
   game: GAME,
   gameDetail: GAME_DETAIL,
   gameLike: GAME_LIKE,

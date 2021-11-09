@@ -33,4 +33,12 @@ module.exports = {
   LOGOUT_SUCCESS: '로그아웃 성공',
   NO_USER: '존재하지 않는 회원입니다.',
   MISS_MATCH_PW: '비밀번호가 맞지 않습니다.',
+
+  // 게임(퍼블리시)
+  CREATE_GAME_SUCCESS: '게임 배포 성공',
+  READ_GAME_SUCCESS: '게임 조회 성공',
+  READ_GAME_FAIL: '게임 조회 실패',
+  CREATE_LIKE_SUCCESS: '좋아요 추가 성공',
+  DELETE_LIKE_SUCCESS: '좋아요 삭제 성공',
+  NO_GAME: '해당 게임이 없습니다.',
 };

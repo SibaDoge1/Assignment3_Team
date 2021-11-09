@@ -217,8 +217,8 @@
 
 - Postman을 활용하여 API 작동 테스트를 진행했습니다. 
 - __배포된 서버 주소__ 및 자세한 API 명세는 아래에서 확인 가능합니다.
-- [🗂 API Description Link](https://documenter.getpostman.com/view/18068137/UVC2J9gg)
-- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4597ce83f6214058476a?action=collection%2Fimport) 을 클릭하여 웹브라우저 혹은 Postman 클라이언트에 콜렉션이 로드되면
+- [🗂 API Description Link](https://documenter.getpostman.com/view/15698210/UVC5F7jC)
+- [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/15698210/UVC5F7jC) 을 클릭하여 웹브라우저 혹은 Postman 클라이언트에 콜렉션이 로드되면
    1. Variables 탭에서 서버 Host와 Port를 지정합니다. (기본값이 지정되어 있습니다.
    2. Variables 탭에서 테스트하는 동안 사용할 username과 password 그리고 newProjectName을 지정합니다. (기본값이 지정되어 있습니다.)
    3. 그후 우측 상단의 Run 버튼을 눌러 RUN ORDER 화면에 진입한 뒤 Run \[Collection Name\]을 클릭하면, 이상적인 상황에서의 테스트가 진행됩니다.
@@ -244,11 +244,6 @@
 </br>
 </br>
 
-## 📕 과정 중에 사용한 설계문서
-
- - [ API 설계 (notion) ](https://www.notion.so/pre-onboarding15/3-4de10e004e434935a5ff02205046f207)
-
-<br>
 
 ## 😎 컨벤션 설정
 

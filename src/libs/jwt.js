@@ -10,13 +10,17 @@ module.exports = {
     //토큰 생성
     sign: async user => {
         const payload = {
-            "domain": user.domain,
-            "username": user.username,
-            "isAdmin": user.isAdmin
+            username : user.username,
+            _id : user._id
         };
 
+        const token = jsonwebtoken.sign(payload, secretKey.secretKey, secretKey.options)
+        const decrypt =  jsonwebtoken.verify(token, secretKey.secretKey)
+        
+
         const result = {
-            accessToken: jsonwebtoken.sign(payload, secretKey.secretKey, secretKey.options),
+            accessToken: token,
+            expires: decrypt.exp,
             //refreshToken: jsonwebtoken.sign(payload, secretKey.secretKey, secretKey.refreshOpti ons)
         };
 

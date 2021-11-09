@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 //라우터 설정
 app.use(routes.root, globalRouter);
-// app.use(routes.user, userRouter);
+app.use(routes.user, userRouter);
 // app.use(routes.token, tokenRouter);
 
 // 아래는 에러 핸들링 함수들

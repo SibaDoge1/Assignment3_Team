@@ -21,12 +21,12 @@ socket.on('onError', (data) => {
 
 
 //텍스트 박스 값 변경 시 서버에 프로젝트내용 전송
-//timer를 통해 최대 0.5초에 한번만 전송함
+//timer를 통해 최대 1초에 한번만 전송함
 let isCoolTime = false;
 function OnCodeChanged() {
   if (!isCoolTime) {
     //타이머로 전송예약함
-    setTimeout(saveCodeData, 500)
+    setTimeout(saveCodeData, 1000)
 
     //쿨타임 설정
     isCoolTime = true;
@@ -34,7 +34,7 @@ function OnCodeChanged() {
     //타이머로 쿨타임 해제
     setTimeout(function () {
       isCoolTime = false;
-    }, 500)
+    }, 1000)
   }
 }
 

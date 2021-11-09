@@ -1,7 +1,7 @@
 const { resFormatter } = require('../utils');
 const { statusCode, responseMessage } = require('../globals');
 const { ValidationError, NotMatchedGameError, UnAuthorizedError } = require('../utils/errors/gameError');
-
+const mongoose = require('mongoose');
 const gameService = require('../services/gameService.js');
 const logger = require('../utils/logger');
 
@@ -23,10 +23,10 @@ exports.getGameList = async (req, res, next) => {
 exports.getGame = async (req, res, next) => {
 	try {
 		const gameId = req.params.gameId;
+		
 		// 입력값 없으면 에러처리 NULL_VALUE : 400
-
-		if (!gameId)
-		throw new ValidationError();
+		if (!mongoose.isValidObjectId(gameId))
+			throw new ValidationError();
 		
 		// 쿼리 실행
 		const game = await gameService.readGame(gameId);
@@ -34,6 +34,7 @@ exports.getGame = async (req, res, next) => {
 		// DB에 없으면 에러처리 
 		if (!game)
 			throw new NotMatchedGameError();
+
 		// 조회수 증가
 		await gameService.updateCount(gameId, ++game.count);
 		
@@ -52,7 +53,7 @@ exports.postGameLike = async (req, res, next) => {
 		const { _id } = req.decoded;
 
 		// 입력값 없으면 에러처리 NULL_VALUE : 400
-		if (!gameId)
+		if (!mongoose.isValidObjectId(gameId))
 			throw new ValidationError();
 
 		// 인증 에러처리 UNAUTHORIZED: 401
@@ -81,8 +82,9 @@ exports.deleteGameLike = async (req, res, next) => {
 		const { _id } = req.decoded;
 
 		// 입력값 없으면 에러처리 NULL_VALUE : 400
-		if (!gameId)
+		if (!mongoose.isValidObjectId(gameId))
 			throw new ValidationError();
+			
 		// 인증 에러처리 UNAUTHORIZED: 401
 		if (!_id)
 			throw new UnAuthorizedError();

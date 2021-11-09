@@ -38,7 +38,8 @@ exports.readGame = async gameId => {
     const game = await Release.findById({
       _id: gameId,
     }).populate('likes').lean();
-
+	if (game === null)
+		return ;
     const author = await User.findById({
       _id: game.authorId._id,
     });

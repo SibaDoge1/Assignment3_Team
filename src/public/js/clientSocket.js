@@ -50,7 +50,7 @@ function gamePublishButtonClick() {
   socket.emit("ForceSave", data);
 
   const token = document.cookie
-  console.log(document)
+
   // 퍼블리시 하는 API Post로 연결
   const url = 'http//localhost:3000/games'
   // const options = {

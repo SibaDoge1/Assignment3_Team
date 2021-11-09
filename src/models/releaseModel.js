@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-// const User = require('./userModel.js');
-// const Project = require('./projectModel.js');
+const User = require('./userModel.js');
+const Like = require('./likeModel');
+const Project = require('./projectModel.js');
 
 const ReleaseSchema = new mongoose.Schema({
 	projectName: {
@@ -16,10 +17,14 @@ const ReleaseSchema = new mongoose.Schema({
 	count: {
 		type: Number,
 		default: 0
-	},
+	},	
 	authorId: {
 		type: Schema.Types.ObjectId,
 		ref: 'User',
+		required: true
+	},
+	authorName: {
+		type: String,
 		required: true
 	},
 	projectId: {
@@ -27,12 +32,19 @@ const ReleaseSchema = new mongoose.Schema({
 		ref: 'Project',
 		required: true
 	}
-}, { timestamps: true, versionKey: false });
+}, { timestamps: true, versionKey: false, toJSON: { virtuals: true } });
 
-ReleaseSchema.virtual('authors', {
-  ref: 'User',
-  localField: 'authorId',
-  foreignField: '_id',
+ReleaseSchema.virtual('userInfo', {
+	ref: 'User',
+	localField: 'authorId',
+	foreignField: '_id'
 });
+
+ReleaseSchema.virtual('likes', {
+	ref: 'Like',
+	localField: '_id', // Of post collection
+	foreignField: 'releaseId',
+	count:true
+})
 
 module.exports = mongoose.model("Release", ReleaseSchema);

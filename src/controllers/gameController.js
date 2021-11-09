@@ -30,14 +30,11 @@ exports.getGame = async (req, res, next) => {
 		// 쿼리 실행
 		const game = await gameService.readGame(gameId);
 
-		console.log(game);
-
 		// DB에 없으면 에러처리 
 		if (!game)
 			throw new NotMatchedGameError();
-
 		// 조회수 증가
-		await gameService.updateCount(gameId, game.count++);
+		await gameService.updateCount(gameId, ++game.count);
 		
 		// Response Code : 200 
 		return res.status(statusCode.OK)
@@ -50,7 +47,7 @@ exports.getGame = async (req, res, next) => {
 // 좋아요 추가
 exports.postGameLike = async (req, res, next) => {
 	try {
-		const gameId = Number(req.params.gameId);
+		const gameId = req.params.gameId;
 		const { _id } = req.decoded;
 
 		// 입력값 없으면 에러처리 NULL_VALUE : 400
@@ -65,7 +62,8 @@ exports.postGameLike = async (req, res, next) => {
 		const likeCount = await gameService.createGameLike(_id, gameId);
 
 		// DB에 없으면 에러처리 
-		if (!result) throw new NotMatchedGameError();
+		if (likeCount === undefined)
+			throw new NotMatchedGameError();
 
 		//Response 201 CREATED
 		return res.status(statusCode.CREATED)
@@ -92,7 +90,7 @@ exports.deleteGameLike = async (req, res, next) => {
 		const likeCount = await gameService.deleteGameLike(_id, gameId);
 
 		// DB에 없으면 에러처리 
-		if (!result)
+		if (likeCount === undefined)
 			throw new NotMatchedGameError();
 
 		// Response 200 OK
@@ -107,9 +105,9 @@ exports.deleteGameLike = async (req, res, next) => {
 exports.searchGame = async (req, res, next) => {
 	try {
 		const content = req.query.content;
-		
+
 		// 입력값 없으면 에러처리 NULL_VALUE : 400
-		if (!content)
+		if (content.length === 0)
 			throw new ValidationError();
 
 		// 쿼리 실행
@@ -117,7 +115,7 @@ exports.searchGame = async (req, res, next) => {
 
 		// Response Code : 200 
 		return res.status(statusCode.OK)
-		  .send(resFormatter.success(responseMessage.READ_GAME_SUCCESS, {data: search}));
+		  .send(resFormatter.success(responseMessage.READ_GAME_SUCCESS, search));
 	} catch (err) {
 		next(err);
 	}

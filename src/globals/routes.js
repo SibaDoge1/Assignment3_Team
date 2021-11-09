@@ -13,7 +13,7 @@ const PROJECT_MY_DETAIL = '/:projectId'
 
 // Game
 const GAME = '/games';
-const GAME_DETAIL = '/:gameId';
+const GAME_DETAIL = '/block/:gameId';
 const GAME_LIKE = '/like';
 const GAME_SEARCH = '/search';
 

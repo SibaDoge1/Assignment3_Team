@@ -107,7 +107,6 @@
 - 계층 분리를 통해 코드의 가독성을 높였습니다.
 - 리팩토링을 통해 가독성을 높이고, 유지보수를 편하게 하기 위해 노력 했습니다.
 
-
 </br>
 </br>
 
@@ -121,7 +120,7 @@
 
 ### [ 조회수 수정, 좋아요 API]
 
-- 프로젝트 당 배포 할수 있는 개수는 하나로 구현하고, 배포한 게임은 수정 가능, 수정 후 재배포시 기존 배포된 게임도 수정 가능하게 기능 구현 하였습니다.
+- 프로젝트 당 배포 할수 있는 개수는 하나로 구현하고, 배포한 게임은 수정 가능, 수정 후 재배포시 기존 배포된 프로젝트도 수정 가능하게 기능 구현 하였습니다.
 
 <br>
 
@@ -185,6 +184,7 @@
 
 - 그 결과 이전과 똑같은 방법으로 테스트했을 때, 90번에 달하는 저장 요청이 9번의 버퍼저장과 4번의 DB쿼리 실행으로 줄어들었음에도 실시간 저장이 가능해졌습니다.
 
+
 </br>
 </br>
 
@@ -205,6 +205,7 @@
     JWT_ALGO="HS256"
     ```
 
+
 </details>
 
 
@@ -217,6 +218,19 @@
 - Postman을 활용하여 API 작동 테스트를 진행했습니다. 
 - __배포된 서버 주소__ 및 자세한 API 명세는 아래에서 확인 가능합니다.
 - [🗂 API Description Link](https://documenter.getpostman.com/view/18068137/UVC2J9gg)
+- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4597ce83f6214058476a?action=collection%2Fimport) 을 클릭하여 웹브라우저 혹은 Postman 클라이언트에 콜렉션이 로드되면
+   1. Variables 탭에서 서버 Host와 Port를 지정합니다. (기본값이 지정되어 있습니다.
+   2. Variables 탭에서 테스트하는 동안 사용할 username과 password 그리고 newProjectName을 지정합니다. (기본값이 지정되어 있습니다.)
+   3. 그후 우측 상단의 Run 버튼을 눌러 RUN ORDER 화면에 진입한 뒤 Run \[Collection Name\]을 클릭하면, 이상적인 상황에서의 테스트가 진행됩니다.
+    <img src = "https://user-images.githubusercontent.com/32833404/140971968-5bbe1a9a-5dd4-43a4-80f5-54f36146cabf.jpg">
+       
+   4. 좌측의 Workspace 화면에서 해당 콜렉션과 그 요청에는 여러 이상적이지 않은 상황의 테스트에 대한 예시가 있습니다.</br>
+    <img src ="https://user-images.githubusercontent.com/32833404/140972241-79be0bbf-d147-4a71-981c-d6b797b13901.png">
+
+        **유의사항**
+        *일부 요청의 경우 JWT를 필요로합니다. JWT는 로그인 과정에서 "Set-Cookie" 헤더를 통해 클라이언트가 스스로 관리하게끔 전달됩니다.
+        *프로젝트 등록 과정에서 콜렉션 Variable의 projectId를 자동으로 수정합니다. 이를 원치 않는다면 해당 요청의 Test Script에서 지워주세요
+ 
 - __게임 제작의 경우__ 다음과 같은 과정으로 __브라우저를 이용__ 하여 확인 가능합니다.
   1. 테스트 하기 전, api요청을 통해 프로젝트를 생성하고 프로젝트Id를 알고있어야 합니다.
      -  테스트를 위하여, [.env설정 노션 링크](https://www.notion.so/pre-onboarding15/750e9c9bd84f49bda72146b46a77923a)에 예시용 정보 및 주소를 적어놓았습니다.
@@ -225,6 +239,7 @@
   
   3.  아래 주소로 접속하여 게임제작 및 퍼블리시를 테스트합니다.
        -  게임제작 페이지 http://{{서버 주소}}/projects/my/{{프로젝트Id}}?username={{유저네임}} 
+
 
 </br>
 </br>

@@ -9,7 +9,7 @@ function attachServer(server) {
     socket.emit('news', {
       message: "서버 연결 성공"
     });
-    logger.log("socket connected" + socket.id);
+    logger.log("socket connected " + socket.id);
 
     socket.on('onCodeChanged', (data) => {
       projectContoller.saveToBuffer(data);

@@ -3,6 +3,7 @@ const { statusCode, responseMessage } = require('../globals');
 const { ValidationError, NotMatchedGameError, UnAuthorizedError } = require('../utils/errors/gameError');
 
 const gameService = require('../services/gameService.js');
+const logger = require('../utils/logger');
 
 // 게임 목록 조회(10개)
 exports.getGameList = async (req, res, next) => {

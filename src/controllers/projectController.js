@@ -3,9 +3,14 @@ const { resFormatter } = require('../utils');
 const { ValidationError } = require('../utils/errors/userError');
 const { UnAuthorizedError } = require('../utils/errors/gameError');
 const { createProject, getProjectList, getProject, deleteProject } = require('../services/projectService');
-
+const { updateProject } = require('../services/projectService');
+const mongoose = require('mongoose');
+const logger = require('../utils/logger');
 
 const FILE_PATH = "../public/gameEditor.html"
+
+const saveDataBuffer = new Map();
+const saveTimerBuffer = new Map();
 
 
 exports.createProject = async (req, res, next) => {
@@ -73,8 +78,11 @@ exports.getMyProjectDetail = async (req, res, next) => {
         if (username === undefined || username != verified) {
             throw new ValidationError();
         }
-        if (isNaN("0x"+projectId)) {
+        if (!mongoose.isValidObjectId(projectId)) {
             throw new ValidationError();
+        }
+        if(username != verified){
+            throw new UnAuthorizedError()
         }
 
         // TODO projectService를 이용하여 렌더링에 포함할 정보 입력
@@ -162,6 +170,7 @@ exports.saveToBuffer = async (data) => {
             });
             saveTimerBuffer.set(data.projectId, timer);
         }
+        logger.log("project "+data.projectId+" saved in buffer");
     } catch (err) {
         throw err;
     }
@@ -197,6 +206,7 @@ exports.bufferToDB = async (data) => {
         else {
             saveDataBuffer.delete(data.projectId);
             saveTimerBuffer.delete(data.projectId);
+            logger.log("project "+data.projectId+" save completed");
         }
 
     } catch (err) {

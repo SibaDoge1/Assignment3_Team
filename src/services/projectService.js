@@ -64,7 +64,7 @@ exports.getProject = async projectId => {
 exports.updateProject = async (projectId, projectName, projectData) => {
   try {
     let project = await projectModel.findOneAndUpdate({
-      projectId
+      '_id':projectId
     }, {
       projectData,
       projectName

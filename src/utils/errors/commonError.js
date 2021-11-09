@@ -10,6 +10,7 @@ class NoPageError extends Error {
   }
 }
 
+//DB에 데이터 미존재
 class EntityNotExistError extends Error { // 404
   constructor(message = responseMessage.ENTITY_NOT_EXIST, status = statusCode.NOT_FOUND) {
     super(message);

@@ -14,6 +14,7 @@ exports.postUser = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
+    console.log(req.body);
     //입력값 확인
     if (username === undefined || password === undefined) {
       throw new ValidationError();
